@@ -20,6 +20,13 @@ public class StoryClient {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    public ResponseEntity<String> getStory( Long storyId ) {
+        final String madeURL = String.format( STORY_PATH_V1 + "/%d", storyId );
+        log.error( "URL:" + madeURL );
+        ResponseEntity<String> result = restTemplate.getForEntity( madeURL, String.class );
+        return result;
+    }
+
     public Story saveNewStory( Story story ) {
         final String madeURL = STORY_PATH_V1 ;
         log.error( "URL:"+ madeURL);
@@ -28,10 +35,4 @@ public class StoryClient {
         return story1;
     }
 
-    public ResponseEntity<String> getStory( Long storyId ) {
-        final String madeURL = String.format( STORY_PATH_V1 + "/%d", storyId );
-        log.error( "URL:"+ madeURL);
-        ResponseEntity<String> result = restTemplate.getForEntity( madeURL, String.class );
-        return result;
-    }
 }

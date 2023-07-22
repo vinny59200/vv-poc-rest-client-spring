@@ -15,14 +15,15 @@ public class StoryController {
     @Autowired
     private StoryClient storyClient;
 
+    @RequestMapping( value = "/api/stories/{id}",
+                     method = RequestMethod.GET )
+    public ResponseEntity<String> getStoryById( @PathVariable( value = "id" ) Long storyId ) {
+        return storyClient.getStory( storyId );
+    }
 
     @RequestMapping(value="/api/stories", method = RequestMethod.POST)
     public Story postOneStory(@RequestBody Story story) {
         return storyClient.saveNewStory( story );
     }
 
-    @RequestMapping(value= "/api/stories/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> getStoryById( @PathVariable( value = "id" ) Long storyId ) {
-        return storyClient.getStory( storyId );
-    }
 }
